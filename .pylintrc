@@ -10,7 +10,9 @@ disable=
     C0303,  # Trailing whitespace
     C0304,  # Final new line missing
     E0015,  # Python syntax error
-    C0321,  #multiple-statements
+    C0321,  # multiple-statements
+    W0719,  # broad-exception-raised
+
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
