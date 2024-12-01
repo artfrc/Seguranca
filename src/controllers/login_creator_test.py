@@ -1,6 +1,6 @@
+import pytest
 from src.drivers.password_handler import PasswordHandler
 from .login_creator import LoginCreator
-import pytest
 
 USERNAME_GLOBAL = "john"
 PASSWORD = "123456"
