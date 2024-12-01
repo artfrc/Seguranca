@@ -1,16 +1,17 @@
 from typing import Dict
 from datetime import datetime, timedelta, timezone
 import jwt
+from src.configs.jwt_configs import jwt_infos
 
 class JwtHandler:
     def create_jwt_token(self, body: Dict = {}) -> str: #pylint: disable= W0102, dangerous-default-value
         token = jwt.encode(
             payload={
-                'exp': datetime.now(timezone.utc) + timedelta(minutes=1),
+                'exp': datetime.now(timezone.utc) + timedelta(minutes=int(jwt_infos['JWT_HOURS'])),
                 **body
             },
-            key='my_secret_key',
-            algorithm='HS256'
+            key=jwt_infos['KEY'],
+            algorithm=jwt_infos['ALGORITHM']
         )
 
         return token
@@ -18,8 +19,8 @@ class JwtHandler:
     def decode_jwt_token(self, token: str) -> Dict:
         token_info = jwt.decode(
             token,
-            key='my_secret_key',
-            algorithms=['HS256']
+            key=jwt_infos['KEY'],
+            algorithms=jwt_infos['ALGORITHM']
         )
 
         return token_info
