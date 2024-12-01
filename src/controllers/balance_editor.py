@@ -1,7 +1,8 @@
 from typing import Dict
 from src.models.interfaces.user_repository import UserRepositoryInterface
+from .interfaces.balance_editor import IBalanceEditor
 
-class BalanceEditor:
+class BalanceEditor(IBalanceEditor):
     def __init__(self, user_repository: UserRepositoryInterface):
         self.__user_repository = user_repository
 

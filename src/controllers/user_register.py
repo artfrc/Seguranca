@@ -1,8 +1,9 @@
 from typing import Dict
 from src.models.interfaces.user_repository import UserRepositoryInterface
 from src.drivers.password_handler import PasswordHandler
+from .interfaces.user_register import IUserRegister
 
-class UserRegister:
+class UserRegister(IUserRegister):
     def __init__(self, user_repository: UserRepositoryInterface):
         self.__user_repository = user_repository
         self.__password_handler = PasswordHandler()

@@ -2,8 +2,9 @@ from typing import Dict, Tuple
 from src.models.interfaces.user_repository import UserRepositoryInterface
 from src.drivers.jwt_handler import JwtHandler
 from src.drivers.password_handler import PasswordHandler
+from .interfaces.login_creator import ILoginCreator
 
-class LoginCreator:
+class LoginCreator(ILoginCreator):
     def __init__(self, user_repository: UserRepositoryInterface):
         self.__user_repository = user_repository
         self.__jwt_handler = JwtHandler()
