@@ -17,7 +17,7 @@ class UserRepository:
         )
         self.__conn.commit()
     
-    def edit_balance(self, user_id: str, new_balance: float):
+    def edit_balance(self, user_id: int, new_balance: float):
         cursor = self.__conn.cursor()
         cursor.execute(
             '''
@@ -33,7 +33,8 @@ class UserRepository:
         cursor = self.__conn.cursor()
         cursor.execute(
             '''
-                SELECT id, username, password FROM users
+                SELECT id, username, password 
+                FROM users
                 WHERE username = ?;
             ''',
             (username,)
