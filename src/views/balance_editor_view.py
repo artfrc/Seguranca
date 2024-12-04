@@ -8,8 +8,13 @@ class BalanceEditorView(ViewInterface):
         self.__controller = controller
 
     def handle(self, request: HttpRequest) -> HttpResponse:
+        print("Headers:", request.headers)
+        print("Body:", request.body)
+        print("Params:", request.params)
+        print("Token Infos:", request.token_infos)
         new_balance = request.body.get('new_balance')
         user_id = request.params.get('user_id')
+
         self.__validate_inputs(float(new_balance), user_id)
 
         response = self.__controller.edit_balance(user_id, new_balance)
