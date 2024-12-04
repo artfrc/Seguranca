@@ -7,8 +7,10 @@ class __DBConnectionHandler: #pylint: disable = C0103, invalid-name
         self.__conn = None
 
     def connect(self):
-        self.__conn = sqlite3.connect(self.__connection_string)
-
+        self.__conn = sqlite3.connect(
+            self.__connection_string,
+            check_same_thread=False #usar a conexão em vários locais sem precisar inicializar várias vezes
+        )
     def get_connection(self) -> Connection:
         return self.__conn
     

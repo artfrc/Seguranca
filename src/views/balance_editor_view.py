@@ -10,7 +10,7 @@ class BalanceEditorView(ViewInterface):
     def handle(self, request: HttpRequest) -> HttpResponse:
         new_balance = request.body.get('new_balance')
         user_id = request.params.get('user_id')
-        self.__validate_inputs(new_balance, user_id)
+        self.__validate_inputs(float(new_balance), user_id)
 
         response = self.__controller.edit_balance(user_id, new_balance)
         
@@ -21,7 +21,6 @@ class BalanceEditorView(ViewInterface):
             not new_balance
             or not user_id
             or not isinstance(new_balance, float)
-            or not isinstance(user_id, int)
         ):
             raise Exception('Invalid input')
     
