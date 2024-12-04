@@ -2,6 +2,8 @@ from typing import Dict, Tuple
 from src.models.interfaces.user_repository import UserRepositoryInterface
 from src.drivers.jwt_handler import JwtHandler
 from src.drivers.password_handler import PasswordHandler
+from src.errors.types.http_not_found import  NotFoundError
+from src.errors.types.http_unauthorized import UnauthorizedError
 from .interfaces.login_creator import ILoginCreator
 
 class LoginCreator(ILoginCreator):
@@ -23,13 +25,13 @@ class LoginCreator(ILoginCreator):
         repo = self.__user_repository   
         user = repo.get_user_by_username(username)
         if not user:
-            raise Exception("User not found") #pylint: disable=W0719, broad-exception-raised
+            raise NotFoundError("User not found") #pylint: disable=W0719, broad-exception-raised
         return  user
     
     def __verify_password(self, password: str, hashed_password: str):
         is_password_correct =  self.__password_handler.check_password(password, hashed_password)
         if not is_password_correct:
-            raise Exception("Wrong password") #pylint: disable=W0719, broad-exception-raised
+            raise UnauthorizedError("Wrong password") #pylint: disable=W0719, broad-exception-raised
         
     def create_jwt_token(self, user_id: int) -> str:
         pay_load = {
